@@ -54,7 +54,6 @@ addConfiguration(viztree)
 rng('default');
 path = plan(planner,startConfig,viztree.StoredConfigurations');
 
-
 interpStates = interpolate(planner, path);
 
 for i = 1:2:size(interpStates,1)
