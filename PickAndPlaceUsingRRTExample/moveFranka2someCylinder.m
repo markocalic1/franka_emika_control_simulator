@@ -35,6 +35,8 @@ toolSpeed = 0.1; % m/s
 jointInit = startConfig;
 taskInit = getTransform(franka,jointInit,endEffector);
 
+%Move robot hand above Tcyl defined in franka_and_env.m only changed z
+%variable 
 taskFinal = trvec2tform([0.5, 0.15 ,0.45])*axang2tform([1 1 0 pi]);
 
 % taskFinal = trvec2tform([0.4,0,0.6])*axang2tform([1 1 0 pi]);
