@@ -136,8 +136,7 @@ initialGuess = wrapToPi(jointInit);
 jointFinal = ik(endEffector,taskFinal,weights,initialGuess);
 jointFinal = wrapToPi(jointFinal);
 
-goalConfig = [-0.6564 0.2885 -0.3187 -1.5941 0.1103 1.8678 -0.2344 0.04 0.04];
-% goalConfig= jointFinal;
+goalConfig= jointFinal;
 planner.MaxConnectionDistance = 1;
 planner.ValidationDistance = 0.2;
 planner.EnableConnectHeuristic = false;
