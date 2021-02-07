@@ -15,8 +15,8 @@ cleanup = onCleanup(@()warning(warnState));
 franka = loadrobot("frankaEmikaPanda", "DataFormat","row",'Gravity',[0 0 -9.81]);
 
 % Open the gripper during planning
-% franka.Bodies{10}.Joint.HomePosition = 0.04;
-% franka.Bodies{11}.Joint.HomePosition = 0.04;
+franka.Bodies{10}.Joint.HomePosition = 0.04;
+franka.Bodies{11}.Joint.HomePosition = 0.04;
 % franka.Bodies{10}.Joint.PositionLimits = [0.04, 0.04];
 % franka.Bodies{11}.Joint.PositionLimits = [0.04, 0.04];
 

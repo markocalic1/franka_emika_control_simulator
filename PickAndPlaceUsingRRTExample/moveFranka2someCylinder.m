@@ -31,23 +31,24 @@ toolSpeed = 0.1; % m/s
 
 
 % Set the initial and final end-effector pose.
-
 jointInit = startConfig;
 taskInit = getTransform(franka,jointInit,endEffector);
 
 %Move robot hand above Tcyl defined in franka_and_env.m only changed z
 %variable 
-taskFinal = trvec2tform([0.5, 0.15 ,0.45])*axang2tform([1 1 0 pi]);
-
-% taskFinal = trvec2tform([0.4,0,0.6])*axang2tform([1 1 0 pi]);
+taskFinal = trvec2tform([0.5, 0.15 ,0.4])*axang2tform([1 1 0 pi]);
 
 
 
+
+distance = norm(tform2trvec(taskInit)-tform2trvec(taskFinal)); 
 initTime = 0;
 finalTime = (distance/toolSpeed) - initTime;
 trajTimes = initTime:timeStep:finalTime;
 timeInterval = [trajTimes(1); trajTimes(end)];
 
+% generates a trajectory that interpolates between two 4-by-4 homogeneous transformations,
+% T0 and TF, with points based on the time interval and given time samples.
 [taskWaypoints,taskVelocities] = transformtraj(taskInit,taskFinal,timeInterval,trajTimes); 
 
 
@@ -64,6 +65,8 @@ jointFinal = ik(endEffector,taskFinal,weights,initialGuess);
 jointFinal = wrapToPi(jointFinal);
 
 
+% plans a path between the specified start and goal configurations using the
+% manipulator rapidly exploring random trees (RRT) planner rrt.
 rng('default');
 path = plan(planner,config,jointFinal);
 
